@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+{% block user_detail %}{% endblock %}
+{% block body %}
+<form action="/credit_limit" method = "post">
+    <table style = "width:100%;">
+    <colgroup>
+        <col span=2>
+        <col style="width:700px">
+        <col span = 2>
+    </colgroup>
+        <tr>
+            <th>User_ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Credit Limit</th>
+            <th>Top Up</th>
+        </tr>
+        {% for row in rows %}
+            <tr>
+                <td  style="text-align:center">{{row["user_id"]}}</td>
+                <td  style="text-align:center">{{row["username"]}}</td>
+                <td style="text-align:center; font-size:25px;">{{row["address"]}}</td>
+                <td style="text-align:center">{{row["credit_limit"]}}</td>
+                <td style="text-align:center"><input style="width: 75px; font-size:17px;" type = "number" placeholder = "Amount" id="amount{{loop.index}}" name="amount{{loop.index}}"></td>
+                    <input type="hidden" id="user_id{{loop.index}}" name="user_id{{loop.index}}" value={{row["user_id"]}}></input>
+            </tr>
+        {% endfor %}
+    </table>
+
+            <button class="btn btn-primary" type="submit" style="float:right; font-size:25px;">Submit</button>
+</form>
+
+
+<script>
+function check_admin(){
+  if (document.getElementById("username").value == "admin"){
+    document.getElementById("orderbook").innerHTML = "Order Book";
+    document.getElementById("credit_limit").innerHTML = "Credit Limit";
+    document.getElementById("update").innerHTML = "Update products";
+  }
+}
+</script>
+
+{% endblock %}

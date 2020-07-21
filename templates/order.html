@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+
+{% block body %}
+
+    <form action ="/cart" method ="post">
+    <table style="width:100%">
+        <tr>
+            <th>Product</th>
+            <th>Unit</th>
+            <th>Cost / unit </th>
+            <th>Number of units</th>
+            <th>Bill value</th>
+        </tr>
+            <tr>
+                <td  style="text-align:center" >{{product_name}}</td>
+                <td style="text-align:center" >{{unit}}</td>
+                <td style="text-align:center" id="unit_cost">{{unit_cost}}</td>
+                <input type="hidden" id="product_name" name="product_name" value={{product_name}}>
+                <input type="hidden" id="unit" name="unit" value={{unit}}>
+                <input type="hidden" id="unit_cost" name="unit_cost" value={{unit_cost}}>
+                <td style="text-align:center"><input class="form-control" name="quantity" id = "quantity" placeholder="Number of units" type = "number"></input></td>
+                <td style="text-align:center"><p name = "value" id = "value"></p></td>
+            </tr>
+    </table>
+            <button name="data" type="button" onclick="Calculate()">Click to confirm the bill value</button><br>
+
+            <button class="btn btn-primary" type="submit">Click to buy</button>
+    </form>
+
+
+
+<script>
+    function Calculate(){
+        quantity = parseFloat(document.getElementById("quantity").value);
+        unit_cost = document.getElementById("unit_cost").innerHTML;
+        document.getElementById("value").innerHTML = quantity * unit_cost;
+    }
+</script>
+
+</body>
+</html>
+{% endblock %}

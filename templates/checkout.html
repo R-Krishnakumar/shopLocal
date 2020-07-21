@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+
+{% block body %}
+<form action="/checkout">
+            <p>User Name : {{user_name}} </p>
+            <p>Total Value : {{total_value}}</p>
+            <input type="hidden" id="total_value" name="total_value" value={{total_value}}>
+            <button class="btn btn-primary" type="submit">Pay</button>
+
+</form>
+{% endblock %}

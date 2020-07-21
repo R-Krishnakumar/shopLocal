@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+
+{% block body %}
+    <form action="/register" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" style="font-size:25px">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password1" placeholder="Password" style="font-size:25px">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password2" placeholder="Password again" style="font-size:25px">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="address" placeholder="Address" style="font-size:25px">
+        </div>
+        <button class="btn btn-primary" type="submit" style="font-size:25px">Register</button>
+        <button class="btn btn-primary" type="submit" style="font-size:25px" formaction="/">Go to log in</button>
+
+        <p>{{message}}</p>
+    </form>
+
+{% endblock %}

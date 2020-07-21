@@ -1,0 +1,27 @@
+<!doctype html>
+
+<form action="/" method="post">
+    <table style="width:100%">
+        <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Unit</th>
+            <th>Cost / unit </th>
+            <th>Number of units</th>
+            <th>Bill value</th>
+        </tr>
+        {% for row in rows %}
+            <tr>
+                <td  style="text-align:center"><a href="/order/{{row["product_id"]}}">{{row["product"]}}</a></td>
+                <td>{{row["description"]}}</td>
+                <td style="text-align:center">{{row["unit"]}}</td>
+                <td style="text-align:center">{{ row["unit_cost"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+            <button class="btn btn-primary" type="submit">Buy</button>
+</form>
+            <p>Total Value : {{total_value}}</p>
+
+
+

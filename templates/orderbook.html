@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+{% block user_detail %}{% endblock %}
+
+{% block body %}
+<form action = "/orderbook" method = "post">
+    <table style="width:100%">
+        <tr>
+            <th>User Id</th>
+            <th>Product</th>
+            <th>Unit</th>
+            <th>Cost / unit </th>
+            <th>Number of units</th>
+            <th>Bill value</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+
+            <input type="hidden" id="address" name="address" value="{{user_name}} {{address}}">
+
+        {% for row in rows %}
+            <tr>
+                <td style="text-align:center"><a href='/order_book/{{row["user_id"]}}' onclick="/order_book/{{row["user_id"]}}">{{row["user_id"]}}</a></td>
+                <td style="text-align:center">{{row["product_name"]}}</td>
+                <td style="text-align:center">{{row["unit"]}}</td>
+                <td style="text-align:center">{{row["unit_cost"]}}</td>
+                <td style="text-align:center">{{row["quantity"]}}</td>
+                <td style="text-align:center">{{row["value"]}}</td>
+                <td style="text-align:center">{{row["date"]}}</td>
+                <td style="text-align:center"><input type="checkbox" id="status{{loop.index}}" name="status{{loop.index}}" value="0"></td>
+                <input type="hidden" id="transaction_id{{loop.index}}" name="transaction_id{{loop.index}}" value={{row["transaction_id"]}}>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+             <p align = "right"><button style = "text-align:right" class="btn btn-primary" type="submit">Check if delivered</button></p>
+</form>
+
+<script>
+function check_admin(){
+  if (document.getElementById("username").value == "admin"){
+    document.getElementById("orderbook").innerHTML = "Order Book";
+    document.getElementById("credit_limit").innerHTML = "Credit Limit";
+    document.getElementById("update").innerHTML = "Update products";
+  }
+}
+
+(function addres(){
+      if (document.getElementById("address").value.length !=1) {
+           alert(document.getElementById("address").value);
+        }
+    })();
+
+
+</script>
+
+{% endblock %}

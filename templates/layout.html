@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<title>Raj Mangal</title>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  .grid-container {
+    display: grid;
+    height:95vh;
+    width:100vw;
+    grid-template-columns: 250px 1100px 10px;
+    grid-template-rows: 10% 5% 80% 5%;
+    background-color:pink;
+  }
+.item7{
+  background-image: url("https://i.ndtvimg.com/i/2015-05/milk-day-625_625x350_71433091943.jpg");
+  background-size: cover;
+  font-size:30px;
+  }
+.item6{
+  background-image: url("https://cdna.artstation.com/p/assets/images/images/018/621/924/large/keya-mahata-milk2.jpg");
+  background-size: cover;
+  font-size:30px;
+  }
+
+table, th, td {
+  border: 1px solid black;
+  padding:0px;
+}
+
+tr:hover {background-color: #f5f5f5;}
+
+.bottom_align {
+    position : absolute;
+    bottom   : 0px;
+    left     : 0px;
+}
+
+
+</style>
+</head>
+
+
+<body onload = "check_admin(), row_status()" >
+<div class="grid-container">
+  <div>{% block user_detail %}{% endblock %}</div>
+  <input type="hidden" id="username" name="username" value={{username}}>
+  <div><h1 style="text-align:center">Raj Mangal Dairy </h1></div>
+  <div> </div>
+  <div></div>
+  <div style="font-size:25px; text-align:center">Address : Near Lakshmi Dry Fruits & near ICICI ATM, Amboli, Andheri West, Mumbai 400058  </div>
+  <div></div>
+  <div style="font-size:25px">
+       <a href = "/homepage" style = "margin-right:50px"> HomePage </a><br>
+       <a href = "/cart" style = "margin-right:50px"> Cart </a><br>
+       <a href = "/history" style = "margin-right:50px"> History </a><br>
+       <a href = "/orderbook" id = "orderbook" style="vertical-align:bottom"></a><br>
+       <a href = "/credit_limit" id = "credit_limit" style="text-align:bottom"></a><br>
+       <a href = "/logout" style="text-align:right"> Logout </a><br>
+       <a href = "/update" id = "update" style="text-align:bottom" class="bottom_align"></a><br>
+
+  </div>
+  <div class="item7" style="overflow-y: scroll">{% block body %}{% endblock %}</div>
+  <div></div>
+  <div></div>
+  <div>Copyright 2020 by Krishnakumar</div>
+  <!--<div></div>-->
+
+
+</body>
+</html>

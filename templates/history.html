@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+
+{% block body %}
+{{from_date}}
+
+<form action="/history" method="post">
+  <input list="products" name="product" id="product" placeholder="Name of product">
+  <datalist id="products">
+    {% for product in products %}
+        <option value={{product["product_name"]}}>{{product["product_name"]}}</option>
+    {% endfor %}
+  </datalist>
+  <input list="users" name="user" id="user" placeholder="User ID">
+  <datalist id="users">
+    {% for user in users %}
+        <option value={{user["user_id"]}}>{{user["user_id"]}}</option>
+    {% endfor %}
+  </datalist>
+
+
+  <label for="from">From:</label>
+  <input type="date" id="from" name="from">
+  <label for="to">To:</label>
+  <input type="date" id="to" name="to">
+  <input type="submit">
+</form>
+<p>{{message}}</p>
+    <table style="width:100%" onload = "check_admin()">
+        <tr>
+            <th style="width:130px">User Name</th>
+            <th style="width:130px">Product</th>
+            <th style="width:65px">Unit</th>
+            <th style="width:65px">Cost / unit </th>
+            <th style="width:65px">Number of units</th>
+            <th>Bill value</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {% for row in rows %}
+            <tr>
+                <td style="text-align:center">{{row["username"]}}</td>
+                <!--<td><p class = check_if_admin({{row["user_name"]}}) name=check_if_admin({{row["user_name"]}})></p></td>-->
+                <!--<input type="hidden" class = "user_names" name="user_names" value ={{ row["user_name"] }}>-->
+                <td style="text-align:center">{{row["unit"]}}</td>
+                <td style="text-align:center">{{row["unit_cost"]}}</td>
+                <td style="text-align:center">{{row["quantity"]}}</td>
+                <td style="text-align:center">{{row["value"]}}</td>
+                <td style="text-align:center">{{row["date"]}}</td>
+                <td style="text-align:center">{{row['status']}}</td>
+<!--<input type="hidden" id=row_status name=row_status value={{row['status']}}>-->
+            </tr>
+        {% endfor %}
+    </table>
+            <p>Total Value : Rs. {{total_value}}</p>
+
+<script>
+function row_status(){
+  if (document.getElementById("row_status").value == "0"){
+    document.getElementById("status").innerHTML = "To be delivered";
+  }
+  else {
+    document.getElementById("status").innerHTML = "Delivered";
+  }
+}
+function check_admin(){
+  if (document.getElementById("username").value == "admin"){
+    document.getElementById("orderbook").innerHTML = "Order Book";
+    document.getElementById("credit_limit").innerHTML = "Credit Limit";
+    document.getElementById("update").innerHTML = "Update products";
+  }
+}
+
+
+    // function check_if_admin(x){
+    //     alert(user_name.value);
+    //     // alert(document.getElementByClass("user_names").value);
+    //     if (user_name.value == "admin"){
+    //         document.getElementById("username").innerHTML = "User Name" ;
+    //         return document.getElementByClass("user_names").value;
+    // }
+    //     else{
+    //         document.getElementById("username").innerHTML = "";
+    //         document.getElementByClass("user_namess").innerHTML = "";
+    //     }
+
+    // }
+</script>
+
+{% endblock %}
+
+

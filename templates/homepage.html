@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+
+
+{% block user_detail %}
+    <div  style="font-size:25px;" id="user_detail"></div>
+{% endblock %}
+
+
+{% block body %}
+<form action="/homepage" method="post">
+    <table style="width:100%" id="table_id">
+        <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Unit</th>
+            <th>Cost / unit </th>
+            <th>Revised Rate</th>
+        </tr>
+        {% for row in rows %}
+            <tr>
+                <td  style="text-align:center"><a href="/order/{{row["product_id"]}}">{{row["product_name"]}}</a></td>
+                <td style="text-align:center">{{row["description"]}}</td>
+                <td style="text-align:center">{{row["unit"]}}</td>
+                <td style="text-align:center">{{ row["unit_cost"] }}</td>
+                <td style="text-align:center"><input type="number" name = "rate{{loop.index}}" placeholder="Revised rate"></td>
+                            <input type="hidden" id="user_name" name="user_name" value={{username}}>
+            </tr>
+        {% endfor %}
+                <td><input type = "text" placeholder = "Product" name="new_product"></td>
+                <td><input type = "text" placeholder = "Description" name="new_description"></td>
+                <td><input type = "text" placeholder = "Unit" name="new_unit"></td>
+                <td><input type = "number" placeholder = "Unit Cost" name = "new_unit_cost"></td>
+                <td><button class="btn btn-primary" type="submit" id = "button">Submit</button></td>
+    </table>
+            <marquee behavior="scroll" direction="left">Click on the product that you want to buy ... </marquee>
+</form>
+
+
+
+
+<script>
+(function check_user(){
+   if (document.getElementById("user_name").value != "admin"){
+        var tbl  = document.getElementById('table_id');
+        document.getElementById("button").style.display="none"
+        for (var row=0; row<tbl.rows.length;row++) {
+          tbl.rows[row].cells[4].style.display ="none";
+        }
+        for (var col=0; col<tbl.rows[1].cells.length;col++) {
+          tbl.rows[tbl.rows.length-1].cells[col].style.display ="none";
+        }
+   }
+})();
+
+(function check_admin(){
+  if (document.getElementById("username").value == "admin"){
+    document.getElementById("orderbook").innerHTML = "Order Book";
+    document.getElementById("credit_limit").innerHTML = "Credit Limit";
+    document.getElementById("update").innerHTML = "Update products";
+  }
+  else {
+    document.getElementById("user_detail").innerHTML = "User name : {{username}}<br> Balance credit : {{credit_limit}}";
+  }
+})();
+</script>
+
+{% endblock %}

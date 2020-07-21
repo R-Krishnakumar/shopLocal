@@ -1,0 +1,55 @@
+
+h1{
+    background-color : blue;
+    font-family : sanserif;
+    font-size : 50px;
+}
+body{
+    background-color:orange;
+}
+
+p{
+    font-family : sanserif;
+    font-size : 20px;
+    margin:5px;
+}
+
+ul a {
+    list-style-type : circle;
+    margin:10px;
+}
+
+ul li{
+    font-family : sanserif;
+    font-size : 20px;
+}
+
+ul b{
+    list-style-type : circle;
+    margin:20px;
+}
+
+area:focus{
+  border: none;
+  outline-style: none;
+ }
+
+
+.tangerine{
+    font-family : tangerine;
+    font-weight : bold;
+}
+
+.links{
+    font-size : 20px;
+    margin-right:50px;
+    margin-left:50px;
+}
+
+.safe{
+    height : 500px;
+}
+
+.dance{
+    height : 300px;
+}

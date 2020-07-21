@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+   {% block head %}{% endblock %}
+
+
+{% block user_detail %}
+    <div  style="font-size:25px;" id="user_detail"></div>
+{% endblock %}
+
+{% block body %}
+    <table style = "width:100%">
+        <tr>
+            <th>Product</th>
+            <th>Unit</th>
+            <th>Cost / unit </th>
+            <th>Number of units</th>
+            <th>Bill value</th>
+        </tr>
+        {% for row in rows %}
+            <tr>
+                <td style="text-align:center">{{row["product_name"]}}</td>
+                <td style="text-align:center">{{row["unit"]}}</td>
+                <td style="text-align:center">{{row["unit_cost"]}}</td>
+                <td style="text-align:center">{{row["quantity"]}}</td>
+                <td style="text-align:center">{{row["value"]}}</td>
+                <td><form action="/cart" method="post"><button class="btn btn-primary" type="submit" id="delete_product" name="delete_product" value={{row["transaction_id"]}}>Delete</button></form></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+            <p>Total Value : {{total_value}}</p>
+
+        <form action="/checkout" method="post">
+            <input name="user_ids" placeholder="User ID" id ="user_ids">
+            <input type="hidden" id="user_id" name="user_id" value={{user_id}}><br>
+            <input type="hidden" id="total_value" name="total_value" value = {{total_value}}>
+            <button class="btn btn-primary" type="submit">Check Out</button>
+        </form>
+
+        <form action="/homepage" method="post">
+            <button class="btn btn-primary" type="submit">Buy More</button>
+        </form>
+        <p>{{message}}</p>
+<script>
+(function check_user(){
+   if ('{{user_id}}' == "3"){
+       document.getElementById("user_ids").style.visibility = "visible";
+       document.getElementById("user_ids").required = true;
+   }
+    else {
+        document.getElementById("user_ids").style.visibility = "hidden";
+    }
+})();
+
+function check_admin(){
+  if (document.getElementById("username").value == "admin"){
+    document.getElementById("orderbook").innerHTML = "Order Book";
+    document.getElementById("credit_limit").innerHTML = "Credit Limit";
+    document.getElementById("update").innerHTML = "Update products";
+  }
+  else {
+    document.getElementById("user_detail").innerHTML = "User name : {{username}}<br> Balance credit : {{credit_limit}}";
+  }
+}
+</script>
+
+{% endblock %}
